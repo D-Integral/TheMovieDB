@@ -56,13 +56,7 @@ class APIClient: NSObject {
     
     func authorizeTask() -> URLSessionDataTask? {
         if let theToken = authorizeToken, let url = URL(string: authorizeRequest + theToken) {
-            var request = URLRequest(url: url)
-            request.addValue("application/json", forHTTPHeaderField: "Accept")
-            
-            let dataTask = URLSession.shared.dataTask(with:request, completionHandler: {(data, response, error) in
-                
-            })
-            return dataTask
+            RoutingManager.shared.pushOAuthSignIn(url: url)
         }
         
         return nil

@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        RoutingManager.shared.navigationController = self.navigationController
+        
         APIClient.shared.requestToken()
     }
 }

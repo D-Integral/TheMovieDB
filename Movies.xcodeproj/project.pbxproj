@@ -24,6 +24,9 @@
 		83005D1D22CCDE5B000949C5 /* Movie+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83005D1922CCDE5B000949C5 /* Movie+CoreDataProperties.swift */; };
 		83005D1E22CCDE5B000949C5 /* Movie+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83005D1922CCDE5B000949C5 /* Movie+CoreDataProperties.swift */; };
 		83005D1F22CCDE5B000949C5 /* Movie+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83005D1922CCDE5B000949C5 /* Movie+CoreDataProperties.swift */; };
+		83ACD4A822CE15ED00EC95E1 /* RoutingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ACD4A722CE15EC00EC95E1 /* RoutingManager.swift */; };
+		83ACD4A922CE15ED00EC95E1 /* RoutingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ACD4A722CE15EC00EC95E1 /* RoutingManager.swift */; };
+		83ACD4AA22CE15ED00EC95E1 /* RoutingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ACD4A722CE15EC00EC95E1 /* RoutingManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +64,7 @@
 		83005D0C22CCD631000949C5 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		83005D1822CCDE5B000949C5 /* Movie+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Movie+CoreDataClass.swift"; sourceTree = "<group>"; };
 		83005D1922CCDE5B000949C5 /* Movie+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Movie+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		83ACD4A722CE15EC00EC95E1 /* RoutingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +115,7 @@
 		83005CD922CB940C000949C5 /* Movies */ = {
 			isa = PBXGroup;
 			children = (
+				83ACD4A622CE14A500EC95E1 /* Routing */,
 				83005D2022CCFEEC000949C5 /* View */,
 				83005D0B22CCD602000949C5 /* Entity */,
 				83005CDA22CB940D000949C5 /* AppDelegate.swift */,
@@ -157,6 +162,14 @@
 			children = (
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		83ACD4A622CE14A500EC95E1 /* Routing */ = {
+			isa = PBXGroup;
+			children = (
+				83ACD4A722CE15EC00EC95E1 /* RoutingManager.swift */,
+			);
+			path = Routing;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,6 +303,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83ACD4A822CE15ED00EC95E1 /* RoutingManager.swift in Sources */,
 				83005CDD22CB940D000949C5 /* ViewController.swift in Sources */,
 				83005CE322CB940D000949C5 /* Movies.xcdatamodeld in Sources */,
 				83005CDB22CB940D000949C5 /* AppDelegate.swift in Sources */,
@@ -305,6 +319,7 @@
 			files = (
 				83005D1B22CCDE5B000949C5 /* Movie+CoreDataClass.swift in Sources */,
 				83005D1E22CCDE5B000949C5 /* Movie+CoreDataProperties.swift in Sources */,
+				83ACD4A922CE15ED00EC95E1 /* RoutingManager.swift in Sources */,
 				83005CF322CB9411000949C5 /* MoviesTests.swift in Sources */,
 				83005D0E22CCD631000949C5 /* APIClient.swift in Sources */,
 			);
@@ -316,6 +331,7 @@
 			files = (
 				83005D1C22CCDE5B000949C5 /* Movie+CoreDataClass.swift in Sources */,
 				83005D1F22CCDE5B000949C5 /* Movie+CoreDataProperties.swift in Sources */,
+				83ACD4AA22CE15ED00EC95E1 /* RoutingManager.swift in Sources */,
 				83005CFE22CB9411000949C5 /* MoviesUITests.swift in Sources */,
 				83005D0F22CCD631000949C5 /* APIClient.swift in Sources */,
 			);

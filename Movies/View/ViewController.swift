@@ -10,12 +10,18 @@ import UIKit
 import SafariServices
 
 class ViewController: UIViewController {
+    
+    let allMoviesTableViewController = AllMoviesTableViewTableViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         RoutingManager.shared.navigationController = self.navigationController
-        
-        AuthorizationManager.shared.authorize()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        AuthorizationManager.shared.authorize() {
+            self.navigationController?.present(self.allMoviesTableViewController, animated: false, completion: nil)
+        }
     }
 }

@@ -13,14 +13,20 @@ class RoutingManager: NSObject, SFSafariViewControllerDelegate {
     static let shared = RoutingManager()
     
     public var navigationController: UINavigationController? = nil
+    private var safariDidFinishCompletion: (() -> Void)? = nil
     
-    func pushOAuthSignIn(url: URL) {
+    func pushOAuthSignIn(url: URL, completionHandler: @escaping () -> Void) {
         let safari = SFSafariViewController(url: url)
         safari.delegate = self
         navigationController?.present(safari, animated: true, completion: nil)
+        safariDidFinishCompletion = completionHandler
     }
     
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         AuthorizationManager.shared.requestSessionID()
+        
+        if let theCompletion = safariDidFinishCompletion {
+            theCompletion()
+        }
     }
 }

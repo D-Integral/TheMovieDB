@@ -20,19 +20,19 @@ class AuthorizationManager: NSObject {
     
     let moviesPath: String = "https://api.github.com/repos/Alamofire/Alamofire/contributors"
     
-    public func authorize() {
+    public func authorize(_ completionHandler: @escaping () -> Void) {
         if nil == self.sessionID {
-            self.requestToken()
+            self.requestToken(completionHandler)
         }
     }
     
-    private func requestToken() {
+    private func requestToken(_ completionHandler: @escaping () -> Void) {
         DispatchQueue.global().async { [weak self] in
             guard let this = self else { return }
             let completionHandler: () -> Void = {
                 guard let this = self else { return }
                 
-                this.authenticate()
+                this.authenticate(completionHandler)
             }
             this.tokenRequestDataTask(completionHandler)?.resume()
         }
@@ -56,19 +56,10 @@ class AuthorizationManager: NSObject {
         return nil
     }
     
-    func authenticate() {
-        DispatchQueue.global().async { [weak self] in
-            guard let this = self else { return }
-            this.authenticateTask()?.resume()
-        }
-    }
-    
-    func authenticateTask() -> URLSessionDataTask? {
+    func authenticate(_ completionHandler: @escaping () -> Void) {
         if let theToken = authenticateToken, let url = URL(string: authenticateRequest + theToken) {
-            RoutingManager.shared.pushOAuthSignIn(url: url)
+            RoutingManager.shared.pushOAuthSignIn(url: url, completionHandler: completionHandler)
         }
-        
-        return nil
     }
     
     func requestSessionID() {

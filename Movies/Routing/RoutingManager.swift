@@ -9,14 +9,18 @@
 import UIKit
 import SafariServices
 
-class RoutingManager: NSObject {
+class RoutingManager: NSObject, SFSafariViewControllerDelegate {
     static let shared = RoutingManager()
     
     public var navigationController: UINavigationController? = nil
     
     func pushOAuthSignIn(url: URL) {
-        navigationController?.present(SFSafariViewController(url: url), animated: true, completion: {
-            
-        })
+        let safari = SFSafariViewController(url: url)
+        safari.delegate = self
+        navigationController?.present(safari, animated: true, completion: nil)
+    }
+    
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        AuthorizationManager.shared.requestSessionID()
     }
 }

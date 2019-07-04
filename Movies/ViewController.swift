@@ -16,6 +16,6 @@ class ViewController: UIViewController {
         
         RoutingManager.shared.navigationController = self.navigationController
         
-        APIClient.shared.requestToken()
+        AuthorizationManager.shared.authorize()
     }
 }

@@ -17,13 +17,13 @@ extension Movie {
         return NSFetchRequest<Movie>(entityName: "Movie")
     }
 
-    @NSManaged public var imageURL: URL?
-    @NSManaged public var name: String?
-    @NSManaged public var info: String?
-    @NSManaged public var year: Int64
+    @NSManaged public var poster_path: String?
+    @NSManaged public var title: String?
+    @NSManaged public var overview: String?
+    @NSManaged public var release_date: String?
     @NSManaged public var isFavorite: Bool
     @NSManaged public var buget: Double
     @NSManaged public var ranking: Int64
-    @NSManaged public var country: String?
+    @NSManaged public var original_language: String?
 
 }

@@ -15,12 +15,12 @@ public class Movie: NSManagedObject, Decodable {
 
     enum CodingKeys: String, CodingKey {
         case buget = "buget"
-        case country = "country"
-        case imageURL = "imageURL"
-        case info = "info"
-        case name = "name"
+        case original_language = "original_language"
+        case poster_path = "poster_path"
+        case overview = "overview"
+        case title = "title"
         case ranking = "ranking"
-        case year = "year"
+        case release_date = "release_date"
     }
     
     required convenience public init(from decoder: Decoder) throws {
@@ -33,12 +33,12 @@ public class Movie: NSManagedObject, Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         self.buget = try container.decodeIfPresent(Double.self, forKey: .buget) ?? 0
-        self.country = try container.decodeIfPresent(String.self, forKey: .country)
-        self.imageURL = try container.decodeIfPresent(URL.self, forKey: .imageURL)
-        self.info = try container.decodeIfPresent(String.self, forKey: .info)
-        self.name = try container.decodeIfPresent(String.self, forKey: .name)
+        self.original_language = try container.decodeIfPresent(String.self, forKey: .original_language)
+        self.poster_path = try container.decodeIfPresent(String.self, forKey: .poster_path)
+        self.overview = try container.decodeIfPresent(String.self, forKey: .overview)
+        self.title = try container.decodeIfPresent(String.self, forKey: .title)
         self.ranking = try container.decodeIfPresent(Int64.self, forKey: .ranking) ?? -1
-        self.year = try container.decodeIfPresent(Int64.self, forKey: .year) ?? -1
+        self.release_date = try container.decodeIfPresent(String.self, forKey: .release_date)
     }
     
 }

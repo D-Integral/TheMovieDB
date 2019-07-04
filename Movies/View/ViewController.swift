@@ -20,6 +20,8 @@ class ViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
         AuthorizationManager.shared.authorize() {
             self.navigationController?.present(self.allMoviesTableViewController, animated: false, completion: nil)
         }

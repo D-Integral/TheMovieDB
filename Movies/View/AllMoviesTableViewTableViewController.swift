@@ -17,6 +17,15 @@ class AllMoviesTableViewTableViewController: UITableViewController {
 
         tableView.register(MovieTableViewCell.self as AnyClass, forCellReuseIdentifier: movieCellReuseId)
         tableView.reloadData()
+        
+        APIClient.shared.requestPopularMovies { (popularMovies) in
+            print(popularMovies)
+            
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
 
     // MARK: - Table view data source

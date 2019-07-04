@@ -18,8 +18,6 @@ class AuthorizationManager: NSObject {
     let sessionIDRequest = "https://api.themoviedb.org/3/authentication/session/new?api_key="
     var sessionID: String? = nil
     
-    let moviesPath: String = "https://api.github.com/repos/Alamofire/Alamofire/contributors"
-    
     public func authorize(_ completionHandler: @escaping () -> Void) {
         if nil == self.sessionID {
             self.requestToken(completionHandler)
@@ -96,28 +94,6 @@ class AuthorizationManager: NSObject {
             }
         }
         
-        return nil
-    }
-    
-    func requestMovies(_ completionHandler: @escaping ([Movie]) -> Void) {
-        DispatchQueue.global().async { [weak self] in
-            guard let this = self else { return }
-            this.moviesDataTask(completionHandler)?.resume()
-        }
-    }
-    
-    func moviesDataTask(_ completionHandler: @escaping ([Movie]) -> Void) -> URLSessionDataTask? {
-        if let url = URL(string: moviesPath) {
-            return URLSession.shared.dataTask(with:url, completionHandler: {(data, response, error) in
-                guard let data = data, error == nil else { return }
-
-                let decoder = JSONDecoder()
-                if let contributors = try? decoder.decode([Movie].self, from: data) {
-                    completionHandler(contributors)
-                }
-            })
-        }
-
         return nil
     }
 }

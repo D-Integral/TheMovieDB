@@ -11,17 +11,17 @@ import UIKit
 class AllMoviesTableViewTableViewController: UITableViewController {
     
     let movieCellReuseId = "movieCell"
-    var moviesPage: MoviesPage? = nil
+    var movies: [Movie] = []
         
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.register(MovieTableViewCell.self as AnyClass, forCellReuseIdentifier: movieCellReuseId)
         
-        APIClient.shared.requestPopularMovies { [weak self] (popularMovies) in
+        APIClient.shared.requestPopularMovies { [weak self] (moviesPage) in
             guard let this = self else { return }
             
-            this.moviesPage = popularMovies
+            this.movies.append(contentsOf: moviesPage.results)
             
             DispatchQueue.main.async {
                 this.tableView.reloadData()
@@ -42,14 +42,14 @@ class AllMoviesTableViewTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.moviesPage?.results.count ?? 0
+        return self.movies.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: movieCellReuseId, for: indexPath)
 
         if let movieCell = cell as? MovieTableViewCell {
-            movieCell.update(withMovie: moviesPage?.results[indexPath.row],
+            movieCell.update(withMovie: movies[indexPath.row],
                              newIndex: indexPath.row)
         }
 
@@ -59,50 +59,33 @@ class AllMoviesTableViewTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150.0
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
+    // MARK: - Scroll view delegate
+    
+    var readyToLoadMore = false
+    var lastLoadedPage = 1
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let actualPosition = scrollView.contentOffset.y;
+        let readyToLoadMorePoint = scrollView.contentSize.height - self.tableView.frame.size.height * 4;
+        let loadMorePoint = scrollView.contentSize.height - self.tableView.frame.size.height * 2;
+        
+        if actualPosition > readyToLoadMorePoint && actualPosition < loadMorePoint && self.readyToLoadMore == false {
+            self.readyToLoadMore = true
+        }
+        
+        if (actualPosition > loadMorePoint && self.readyToLoadMore == true) {
+            APIClient.shared.popularMoviesCurrentPage += 1
+            APIClient.shared.requestPopularMovies { [weak self] (moviesPage) in
+                guard let this = self else { return }
+                
+                this.movies.append(contentsOf: moviesPage.results)
+                
+                DispatchQueue.main.async {
+                    this.tableView.reloadData()
+                }
+            }
+            self.readyToLoadMore = false
+        }
+    }
 }

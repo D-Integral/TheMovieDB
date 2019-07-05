@@ -10,6 +10,7 @@ import UIKit
 
 class APIClient: NSObject {
     static let shared = APIClient()
+    var popularMoviesCurrentPage = 1
     
     let moviesPath: String = "https://api.themoviedb.org/3/movie/popular?page=1&language=en-US&api_key=b3d7cbb059e4c69a9900894a64248f18"
     
@@ -43,7 +44,7 @@ class APIClient: NSObject {
         urlComponents?.queryItems = [
             URLQueryItem(name: "api_key", value: AuthorizationManager.shared.APIKey),
             URLQueryItem(name: "language", value: "En-US"),
-            URLQueryItem(name: "page", value: "\(1)")
+            URLQueryItem(name: "page", value: "\(popularMoviesCurrentPage)")
         ]
         
         if let url = urlComponents?.url {

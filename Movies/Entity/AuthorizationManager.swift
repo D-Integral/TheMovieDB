@@ -1,5 +1,5 @@
 //
-//  APIClient.swift
+//  AuthorizationManager.swift
 //  Movies
 //
 //  Created by Dmytro Skorokhod on 7/3/19.

@@ -18,7 +18,7 @@ class AllMoviesTableViewTableViewController: UITableViewController {
 
         tableView.register(MovieTableViewCell.self as AnyClass, forCellReuseIdentifier: movieCellReuseId)
         
-        APIClient.shared.requestPopularMovies { [weak self] (moviesPage) in
+        PopularMoviesNetworkingService.shared.requestPopularMovies { [weak self] (moviesPage) in
             guard let this = self else { return }
             
             this.movies.append(contentsOf: moviesPage.results)
@@ -75,8 +75,8 @@ class AllMoviesTableViewTableViewController: UITableViewController {
         }
         
         if (actualPosition > loadMorePoint && self.readyToLoadMore == true) {
-            APIClient.shared.popularMoviesCurrentPage += 1
-            APIClient.shared.requestPopularMovies { [weak self] (moviesPage) in
+            PopularMoviesNetworkingService.shared.popularMoviesCurrentPage += 1
+            PopularMoviesNetworkingService.shared.requestPopularMovies { [weak self] (moviesPage) in
                 guard let this = self else { return }
                 
                 this.movies.append(contentsOf: moviesPage.results)

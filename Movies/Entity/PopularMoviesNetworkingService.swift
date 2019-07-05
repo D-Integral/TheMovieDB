@@ -1,5 +1,5 @@
 //
-//  APIClient.swift
+//  PopularMoviesNetworkingService.swift
 //  Movies
 //
 //  Created by Dmytro Skorokhod on 7/4/19.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-class APIClient: NSObject {
-    static let shared = APIClient()
+class PopularMoviesNetworkingService: NSObject {
+    static let shared = PopularMoviesNetworkingService()
     var popularMoviesCurrentPage = 1
     
-    let moviesPath: String = "https://api.themoviedb.org/3/movie/popular?page=1&language=en-US&api_key=b3d7cbb059e4c69a9900894a64248f18"
+    let moviesPath: String = "https://api.themoviedb.org/3/movie/popular"
     
     func requestPopularMovies(_ completionHandler: @escaping (MoviesPage) -> Void) {
         DispatchQueue.global().async { [weak self] in

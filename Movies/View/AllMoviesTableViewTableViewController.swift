@@ -11,16 +11,21 @@ import UIKit
 class AllMoviesTableViewTableViewController: UITableViewController {
     
     let movieCellReuseId = "movieCell"
+    var moviesPage: MoviesPage? = nil
         
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.register(MovieTableViewCell.self as AnyClass, forCellReuseIdentifier: movieCellReuseId)
-        tableView.reloadData()
         
-        APIClient.shared.requestPopularMovies { (popularMovies) in
-            print(popularMovies)
+        APIClient.shared.requestPopularMovies { [weak self] (popularMovies) in
+            guard let this = self else { return }
             
+            this.moviesPage = popularMovies
+            
+            DispatchQueue.main.async {
+                this.tableView.reloadData()
+            }
         }
     }
     
@@ -37,20 +42,22 @@ class AllMoviesTableViewTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 100
+        return self.moviesPage?.results.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: movieCellReuseId, for: indexPath)
 
-        cell.backgroundColor = UIColor.green
-        cell.textLabel?.text = "Cell number \(indexPath)"
+        if let movieCell = cell as? MovieTableViewCell {
+            movieCell.update(withMovie: moviesPage?.results[indexPath.row],
+                             newIndex: indexPath.row)
+        }
 
         return cell
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50.0
+        return 100.0
     }
 
     /*

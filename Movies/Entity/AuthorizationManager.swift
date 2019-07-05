@@ -60,14 +60,14 @@ class AuthorizationManager: NSObject {
         }
     }
     
-    func requestSessionID() {
+    func requestSessionID(_ completionHandler: @escaping () -> Void) {
         DispatchQueue.global().async { [weak self] in
             guard let this = self else { return }
-            this.sessionIDRequestDataTask()?.resume()
+            this.sessionIDRequestDataTask(completionHandler)?.resume()
         }
     }
     
-    func sessionIDRequestDataTask() -> URLSessionDataTask? {
+    func sessionIDRequestDataTask(_ completionHandler: @escaping () -> Void) -> URLSessionDataTask? {
         if let url = URL(string: sessionIDRequest + APIKey) {
             do {
                 var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
@@ -83,7 +83,7 @@ class AuthorizationManager: NSObject {
                         if let theData = data {
                             let json = try JSONSerialization.jsonObject(with: theData, options: []) as? [String: Any]
                             self.sessionID = json?["session_id"] as? String
-                            
+                            completionHandler()
                         }
                     } catch {
                         print("Error converting the data with the session ID to JSON.")

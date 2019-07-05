@@ -27,7 +27,12 @@ class RoutingManager: NSObject, SFSafariViewControllerDelegate {
     }
     
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-        AuthorizationManager.shared.requestSessionID()
+        AuthorizationManager.shared.requestSessionID() {
+            AccountNetworkingService.shared.requestAccount({ (account) in
+                print(account)
+                
+            })
+        }
         
         if let theCompletion = safariDidFinishCompletion {
             theCompletion()

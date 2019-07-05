@@ -18,6 +18,8 @@ class AllMoviesTableViewTableViewController: UITableViewController {
 
         tableView.register(MovieTableViewCell.self as AnyClass, forCellReuseIdentifier: movieCellReuseId)
         
+        RoutingManager.shared.navigationController = self.navigationController
+        
         PopularMoviesNetworkingService.shared.requestPopularMovies { [weak self] (moviesPage) in
             guard let this = self else { return }
             
@@ -31,6 +33,11 @@ class AllMoviesTableViewTableViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        AuthorizationManager.shared.authorize() {
+//            DispatchQueue.main.async {
+//            }
+        }
     }
 
     // MARK: - Table view data source

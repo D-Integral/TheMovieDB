@@ -9,7 +9,9 @@
 import UIKit
 
 class PopularMoviesNetworkingService: NSObject {
+    
     static let shared = PopularMoviesNetworkingService()
+    
     var popularMoviesCurrentPage = 1
     
     let moviesPath: String = "https://api.themoviedb.org/3/movie/popular"
@@ -48,7 +50,7 @@ class PopularMoviesNetworkingService: NSObject {
         ]
         
         if let url = urlComponents?.url {
-            var request = URLRequest(url: url, cachePolicy: .reloadIgnoringCacheData, timeoutInterval: 10.0)
+            var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
             request.httpBody = NSData(data: "{}".data(using: .utf8)!) as Data
             request.httpMethod = "GET"
             request.allHTTPHeaderFields = ["content-type": "application/json"]

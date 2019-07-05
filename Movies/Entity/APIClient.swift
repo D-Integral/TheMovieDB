@@ -13,14 +13,14 @@ class APIClient: NSObject {
     
     let moviesPath: String = "https://api.themoviedb.org/3/movie/popular?page=1&language=en-US&api_key=b3d7cbb059e4c69a9900894a64248f18"
     
-    func requestPopularMovies(_ completionHandler: @escaping ([Movie]) -> Void) {
+    func requestPopularMovies(_ completionHandler: @escaping (MoviesPage) -> Void) {
         DispatchQueue.global().async { [weak self] in
             guard let this = self else { return }
             this.popularMoviesDataTask(completionHandler)?.resume()
         }
     }
     
-    func popularMoviesDataTask(_ completionHandler: @escaping ([Movie]) -> Void) -> URLSessionDataTask? {
+    func popularMoviesDataTask(_ completionHandler: @escaping (MoviesPage) -> Void) -> URLSessionDataTask? {
         let request = popularMoviesRequest()
         
         if let theRequest = request {
@@ -29,8 +29,8 @@ class APIClient: NSObject {
                 guard let data = data, error == nil else { return }
                 
                 let decoder = JSONDecoder()
-                if let movies = try? decoder.decode([Movie].self, from: data) {
-                    completionHandler(movies)
+                if let moviesPage = try? decoder.decode(MoviesPage.self, from: data) {
+                    completionHandler(moviesPage)
                 }
             })
         }

@@ -16,10 +16,14 @@ class RoutingManager: NSObject, SFSafariViewControllerDelegate {
     private var safariDidFinishCompletion: (() -> Void)? = nil
     
     func pushOAuthSignIn(url: URL, completionHandler: @escaping () -> Void) {
-        let safari = SFSafariViewController(url: url)
-        safari.delegate = self
-        navigationController?.present(safari, animated: true, completion: nil)
-        safariDidFinishCompletion = completionHandler
+        DispatchQueue.main.async  { [weak self] in
+            guard let this = self else { return }
+            
+            let safari = SFSafariViewController(url: url)
+            safari.delegate = self
+            this.navigationController?.present(safari, animated: true, completion: nil)
+            this.safariDidFinishCompletion = completionHandler
+        }
     }
     
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {

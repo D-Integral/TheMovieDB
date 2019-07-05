@@ -23,7 +23,9 @@ class ViewController: UIViewController {
         super.viewDidAppear(animated)
         
         AuthorizationManager.shared.authorize() {
-            self.navigationController?.present(self.allMoviesTableViewController, animated: false, completion: nil)
+            DispatchQueue.main.async {
+                self.navigationController?.present(self.allMoviesTableViewController, animated: false, completion: nil)
+            }
         }
     }
 }

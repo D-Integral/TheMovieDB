@@ -13,6 +13,14 @@ class MovieTableViewCell: UITableViewCell {
     var movie: Movie? = nil
     let basePosterURL = "https://image.tmdb.org/t/p/w185/"
 
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -39,9 +47,11 @@ class MovieTableViewCell: UITableViewCell {
         guard let theNewMovie = newMovie else { return }
         
         movie = theNewMovie
-        let posterUrl = getPosterUrl()
         
-        backgroundColor = UIColor.orange
+        textLabel?.text = theNewMovie.title
+        detailTextLabel?.text = theNewMovie.overview
+        
+        let posterUrl = getPosterUrl()
         
         if let thePosterURL = posterUrl {
             ImageManager.shared.requestImage(URL: thePosterURL) { [weak self]

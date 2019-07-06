@@ -26,13 +26,9 @@ class DetailsViewController: UIViewController {
     @IBAction func switchValueChanged(_ sender: Any) {
         if let theMovie = movie {
             if self.switcher.isOn {
-                if !DataManager.shared.favorites.contains(theMovie) {
-                    DataManager.shared.favorites.insert(theMovie)
-                }
+                DataManager.shared.addMovie(movie: theMovie)
             } else {
-                if DataManager.shared.favorites.contains(theMovie) {
-                    DataManager.shared.favorites.remove(theMovie)
-                }
+                DataManager.shared.removeMovie(movie: theMovie)
             }
         }
     }

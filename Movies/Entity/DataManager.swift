@@ -51,6 +51,12 @@ class DataManager: NSObject {
                 let favoritesEntity = NSManagedObject(entity: entity, insertInto: context)
                 favoritesEntity.setValue(data, forKey: "data")
                 context?.insert(favoritesEntity)
+                
+                do {
+                    try context?.save()
+                } catch {
+                    print("Error saving the Core Data context.")
+                }
             }
         } catch {
             print("Error encoding data with favorites")
@@ -68,7 +74,7 @@ class DataManager: NSObject {
                 let results = try theContext.fetch(request)
                 for favoritesEntity in results as! [NSManagedObject] {
                     if let data = favoritesEntity.value(forKey: "data") as? Data, let theFavoritesArray = try? decoder.decode([Movie].self, from: data) {
-                        favorites = Set(theFavoritesArray)
+                        favorites = favorites.union(Set(theFavoritesArray))
                     }
                 }
                 
@@ -86,9 +92,18 @@ class DataManager: NSObject {
         if let theContext = context {
             do {
                 try theContext.execute(batchDeleteRequest)
-                
             } catch {
                 print("Error cleaning Core Data storage")
+            }
+        }
+    }
+    
+    func saveContext () {
+        if let theContext = context, theContext.hasChanges {
+            do {
+                try theContext.save()
+            } catch {
+                print("Error \(error) saving the Core Data context.")
             }
         }
     }

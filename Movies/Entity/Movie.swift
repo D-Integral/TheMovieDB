@@ -8,10 +8,14 @@
 
 import Foundation
 
-struct Movie: Codable {
+struct Movie: Codable, Hashable {
     let original_language: String?
     let overview: String?
     let poster_path: String?
     let release_date: String?
     let title: String?
+    
+    static func == (lhs: Movie, rhs: Movie) -> Bool {
+        return lhs.title == rhs.title && lhs.release_date == rhs.release_date
+    }
 }

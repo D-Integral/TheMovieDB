@@ -11,7 +11,6 @@ import UIKit
 class AllMoviesTableViewTableViewController: UITableViewController {
     
     let movieCellReuseId = "movieCell"
-    var movies: [Movie] = []
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +22,7 @@ class AllMoviesTableViewTableViewController: UITableViewController {
         PopularMoviesNetworkingService.shared.requestPopularMovies { [weak self] (moviesPage) in
             guard let this = self else { return }
             
-            this.movies.append(contentsOf: moviesPage.results)
+            DataManager.shared.popularMovies.append(contentsOf: moviesPage.results)
             
             DispatchQueue.main.async {
                 this.tableView.reloadData()
@@ -34,10 +33,12 @@ class AllMoviesTableViewTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        AuthorizationManager.shared.authorize() {
-//            DispatchQueue.main.async {
-//            }
-        }
+//        AuthorizationManager.shared.authorize() {
+//            AccountNetworkingService.shared.requestAccount({ (account) in
+//                print(account)
+//
+//            })
+//        }
     }
 
     // MARK: - Table view data source
@@ -49,14 +50,14 @@ class AllMoviesTableViewTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.movies.count
+        return DataManager.shared.popularMovies.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: movieCellReuseId, for: indexPath)
 
         if let movieCell = cell as? MovieTableViewCell {
-            movieCell.update(withMovie: movies[indexPath.row],
+            movieCell.update(withMovie: DataManager.shared.popularMovies[indexPath.row],
                              newIndex: indexPath.row)
         }
 
@@ -65,6 +66,16 @@ class AllMoviesTableViewTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150.0
+    }
+    
+    // MARK: - Table view delegate
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let movieDetails = storyboard.instantiateViewController(withIdentifier: "MovieDetails") as? DetailsViewController {
+            movieDetails.movie = DataManager.shared.popularMovies[indexPath.row]
+            self.navigationController?.pushViewController(movieDetails, animated:true)
+        }
     }
     
     // MARK: - Scroll view delegate
@@ -86,7 +97,7 @@ class AllMoviesTableViewTableViewController: UITableViewController {
             PopularMoviesNetworkingService.shared.requestPopularMovies { [weak self] (moviesPage) in
                 guard let this = self else { return }
                 
-                this.movies.append(contentsOf: moviesPage.results)
+                DataManager.shared.popularMovies.append(contentsOf: moviesPage.results)
                 
                 DispatchQueue.main.async {
                     this.tableView.reloadData()

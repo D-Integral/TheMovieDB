@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -57,10 +58,46 @@
             </objects>
             <point key="canvasLocation" x="2902" y="402"/>
         </scene>
+        <!--Details View Controller-->
+        <scene sceneID="Tzd-NH-kVZ">
+            <objects>
+                <viewController storyboardIdentifier="MovieDetails" id="Twi-H5-Mac" customClass="DetailsViewController" customModule="Movies" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EPz-Ym-iac">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="j0N-k0-DAE">
+                                <rect key="frame" x="182.5" y="44" width="51" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="9Og-Kh-y0P"/>
+                                    <constraint firstAttribute="width" constant="49" id="zC4-Uu-uTF"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="switchValueChanged:" destination="Twi-H5-Mac" eventType="valueChanged" id="0T8-fD-DtV"/>
+                                    <action selector="switchValueChanged:" destination="LO6-eF-Z9y" eventType="valueChanged" id="ZvR-eR-i7R"/>
+                                </connections>
+                            </switch>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="j0N-k0-DAE" firstAttribute="centerX" secondItem="EPz-Ym-iac" secondAttribute="centerX" id="24A-KZ-ILH"/>
+                            <constraint firstItem="j0N-k0-DAE" firstAttribute="top" secondItem="hHT-cS-SuJ" secondAttribute="top" id="M1F-6s-0or"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="hHT-cS-SuJ"/>
+                    </view>
+                    <connections>
+                        <outlet property="switcher" destination="j0N-k0-DAE" id="6Ga-H0-1Cp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Vv-fA-HO2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="LO6-eF-Z9y" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3984" y="850"/>
+        </scene>
         <!--Favorites-->
         <scene sceneID="AXf-8w-ee5">
             <objects>
-                <tableViewController title="Favorites" id="Psj-di-Zoi" sceneMemberID="viewController">
+                <tableViewController title="Favorites" id="Psj-di-Zoi" customClass="FavoritesTableViewController" customModule="Movies" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ROb-mh-xDm">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -84,7 +121,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Nq-Vg-UYV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3571.0144927536235" y="1536.8303571428571"/>
+            <point key="canvasLocation" x="3451" y="1498"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="jha-y0-BcU">
@@ -111,6 +148,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="bNG-mF-822" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="X63-Zi-zwR">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>

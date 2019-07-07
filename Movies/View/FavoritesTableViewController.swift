@@ -30,12 +30,12 @@ class FavoritesTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        AuthorizationManager.shared.authorize() {
-            AccountNetworkingService.shared.requestAccount({ (account) in
-                print(account)
-                
-            })
-        }
+//        AuthorizationManager.shared.authorize() {
+//            AccountNetworkingService.shared.requestAccount({ (account) in
+//                print(account)
+//                
+//            })
+//        }
     }
     
     // MARK: - Table view data source

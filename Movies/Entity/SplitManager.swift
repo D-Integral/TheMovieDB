@@ -20,7 +20,7 @@ class SplitManager: NSObject {
     public var splitGroup: SplitGroup? = nil
     
     public func generateRandomSplitGroup() {
-        let randomDouble = Double.random(in: 0...1)
+        let randomDouble = Double.random(in: 0.0...1.0)
         
         if randomDouble < 0.5 {
             splitGroup = .first

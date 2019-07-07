@@ -20,6 +20,8 @@ class StartViewController: UIViewController {
     
     var moviesTabBarVC: MoviesTabBarController? = nil
     
+    static var squareWidth: CGFloat = 100.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,10 +37,10 @@ class StartViewController: UIViewController {
         let theVerticalConstraint = NSLayoutConstraint(item: square!, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0)
         verticalConstraint = theVerticalConstraint
         
-        let theWidthConstraint = NSLayoutConstraint(item: square!, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100)
+        let theWidthConstraint = NSLayoutConstraint(item: square!, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: StartViewController.squareWidth)
         widthConstraint = theWidthConstraint
         
-        let theHeightConstraint = NSLayoutConstraint(item: square!, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100)
+        let theHeightConstraint = NSLayoutConstraint(item: square!, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: StartViewController.squareWidth)
         heightConstraint = theHeightConstraint
         
         NSLayoutConstraint.activate([theHorizontalConstraint, theVerticalConstraint, theWidthConstraint, theHeightConstraint])
@@ -188,6 +190,54 @@ class StartViewController: UIViewController {
             
             UIView.animate(withDuration: 0.1, delay: 0.1, options: [], animations: { () -> Void in
                 this.square.transform = CGAffineTransform(rotationAngle: CGFloat.pi * 3.0)
+            }, completion: nil)
+            
+            this.addSplit2Step2Pulsation()
+        }
+    }
+    
+    static var squareWidthForPulsation: CGFloat = 115.0
+    
+    func addSplit2Step2Pulsation() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
+            guard let this = self else { return }
+            
+            UIView.animate(withDuration: 0.1) { () -> Void in
+                if let theOldWidthConstraint = this.widthConstraint {
+                    NSLayoutConstraint.deactivate([theOldWidthConstraint])
+                }
+                
+                if let theOldHeightConstraint = this.heightConstraint {
+                    NSLayoutConstraint.deactivate([theOldHeightConstraint])
+                }
+                
+                let theNewWidthConstraint = NSLayoutConstraint(item: this.square!, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: StartViewController.squareWidthForPulsation)
+                this.widthConstraint = theNewWidthConstraint
+                
+                let theNewHeightConstraint = NSLayoutConstraint(item: this.square!, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: StartViewController.squareWidthForPulsation)
+                this.heightConstraint = theNewHeightConstraint
+                
+                NSLayoutConstraint.activate([theNewWidthConstraint, theNewHeightConstraint])
+                this.view.layoutIfNeeded()
+            }
+            
+            UIView.animate(withDuration: 0.1, delay: 0.1, options: [], animations: { () -> Void in
+                if let theOldWidthConstraint = this.widthConstraint {
+                    NSLayoutConstraint.deactivate([theOldWidthConstraint])
+                }
+                
+                if let theOldHeightConstraint = this.heightConstraint {
+                    NSLayoutConstraint.deactivate([theOldHeightConstraint])
+                }
+                
+                let theNewWidthConstraint = NSLayoutConstraint(item: this.square!, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: StartViewController.squareWidth)
+                this.widthConstraint = theNewWidthConstraint
+                
+                let theNewHeightConstraint = NSLayoutConstraint(item: this.square!, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: StartViewController.squareWidth)
+                this.heightConstraint = theNewHeightConstraint
+                
+                NSLayoutConstraint.activate([theNewWidthConstraint, theNewHeightConstraint])
+                this.view.layoutIfNeeded()
             }, completion: nil)
             
             this.addColorChange()

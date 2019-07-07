@@ -18,6 +18,8 @@ class StartViewController: UIViewController {
     var widthConstraint: NSLayoutConstraint? = nil
     var heightConstraint: NSLayoutConstraint? = nil
     
+    var moviesTabBarVC: MoviesTabBarController? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -124,7 +126,15 @@ class StartViewController: UIViewController {
                 this.view.layoutIfNeeded()
             })
             
-            this.addSplitGroupAnimation1()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in
+                guard let this = self else { return }
+                
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                if let tabBarVC = storyboard.instantiateViewController(withIdentifier: "TabBar") as? MoviesTabBarController {
+                    this.moviesTabBarVC = tabBarVC
+                    this.present(tabBarVC, animated: true, completion: nil)
+                }
+            }
         }
     }
     

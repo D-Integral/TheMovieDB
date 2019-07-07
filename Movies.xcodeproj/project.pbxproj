@@ -17,6 +17,9 @@
 		83005D0D22CCD631000949C5 /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83005D0C22CCD631000949C5 /* AuthorizationManager.swift */; };
 		83005D0E22CCD631000949C5 /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83005D0C22CCD631000949C5 /* AuthorizationManager.swift */; };
 		83005D0F22CCD631000949C5 /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83005D0C22CCD631000949C5 /* AuthorizationManager.swift */; };
+		83A1F88722D1B4D1007E2541 /* SearchNetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A1F88622D1B4D1007E2541 /* SearchNetworkingService.swift */; };
+		83A1F88822D1B4D1007E2541 /* SearchNetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A1F88622D1B4D1007E2541 /* SearchNetworkingService.swift */; };
+		83A1F88922D1B4D1007E2541 /* SearchNetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A1F88622D1B4D1007E2541 /* SearchNetworkingService.swift */; };
 		83ACD4A822CE15ED00EC95E1 /* RoutingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ACD4A722CE15EC00EC95E1 /* RoutingManager.swift */; };
 		83ACD4A922CE15ED00EC95E1 /* RoutingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ACD4A722CE15EC00EC95E1 /* RoutingManager.swift */; };
 		83ACD4AA22CE15ED00EC95E1 /* RoutingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ACD4A722CE15EC00EC95E1 /* RoutingManager.swift */; };
@@ -93,6 +96,7 @@
 		83005CFD22CB9411000949C5 /* MoviesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesUITests.swift; sourceTree = "<group>"; };
 		83005CFF22CB9411000949C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		83005D0C22CCD631000949C5 /* AuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
+		83A1F88622D1B4D1007E2541 /* SearchNetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNetworkingService.swift; sourceTree = "<group>"; };
 		83ACD4A722CE15EC00EC95E1 /* RoutingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingManager.swift; sourceTree = "<group>"; };
 		83FF861822CE77CB007D532E /* AllMoviesTableViewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMoviesTableViewTableViewController.swift; sourceTree = "<group>"; };
 		83FF862022CE7926007D532E /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
@@ -193,6 +197,7 @@
 			children = (
 				83005D0C22CCD631000949C5 /* AuthorizationManager.swift */,
 				83FF862822CE8627007D532E /* PopularMoviesNetworkingService.swift */,
+				83A1F88622D1B4D1007E2541 /* SearchNetworkingService.swift */,
 				83FF864122CFC17D007D532E /* AccountNetworkingService.swift */,
 				83FF862C22CF2DB0007D532E /* MoviesPage.swift */,
 				83FF863022CF3095007D532E /* Movie.swift */,
@@ -368,6 +373,7 @@
 				83FF863122CF3095007D532E /* Movie.swift in Sources */,
 				83FF863E22CF554D007D532E /* DiscardableCacheItem.swift in Sources */,
 				83FF864A22D0B585007D532E /* FavoritesTableViewController.swift in Sources */,
+				83A1F88722D1B4D1007E2541 /* SearchNetworkingService.swift in Sources */,
 				83FF862222CE7926007D532E /* MovieTableViewCell.swift in Sources */,
 				83FF864622CFC36D007D532E /* Account.swift in Sources */,
 				83FF862922CE8627007D532E /* PopularMoviesNetworkingService.swift in Sources */,
@@ -392,6 +398,7 @@
 				83FF864722CFC36D007D532E /* Account.swift in Sources */,
 				83FF863222CF3095007D532E /* Movie.swift in Sources */,
 				83FF862E22CF2DB0007D532E /* MoviesPage.swift in Sources */,
+				83A1F88822D1B4D1007E2541 /* SearchNetworkingService.swift in Sources */,
 				83FF863722CF53B1007D532E /* ImageManager.swift in Sources */,
 				83FF864B22D0B585007D532E /* FavoritesTableViewController.swift in Sources */,
 				83FF862A22CE8627007D532E /* PopularMoviesNetworkingService.swift in Sources */,
@@ -415,6 +422,7 @@
 				83FF864822CFC36D007D532E /* Account.swift in Sources */,
 				83FF863322CF3095007D532E /* Movie.swift in Sources */,
 				83FF862F22CF2DB0007D532E /* MoviesPage.swift in Sources */,
+				83A1F88922D1B4D1007E2541 /* SearchNetworkingService.swift in Sources */,
 				83FF863822CF53B1007D532E /* ImageManager.swift in Sources */,
 				83FF864C22D0B585007D532E /* FavoritesTableViewController.swift in Sources */,
 				83FF862B22CE8627007D532E /* PopularMoviesNetworkingService.swift in Sources */,

@@ -31,6 +31,7 @@ class ImageManager: NSObject {
                 completionHandler(cached, URL)
             } else if let data = try? Data(contentsOf: URL) {
                 Cache.shared.setData(data, forKey: URL.absoluteString)
+                
                 this.items[URL.absoluteString] = nil
                 completionHandler(data, URL)
             }

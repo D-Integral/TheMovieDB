@@ -15,6 +15,7 @@ class DataManager: NSObject {
     
     public var popularMovies: [Movie] = []
     public var favorites: Set<Movie> = []
+    public var filteredMovies: [Movie] = []
     
     internal var context: NSManagedObjectContext? = nil
     

@@ -11,9 +11,12 @@ import UIKit
 class AllMoviesTableViewTableViewController: UITableViewController {
     
     let movieCellReuseId = "movieCell"
+    let searchController = UISearchController(searchResultsController: nil)
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupSearchController()
 
         tableView.register(MovieTableViewCell.self as AnyClass, forCellReuseIdentifier: movieCellReuseId)
         
@@ -40,6 +43,39 @@ class AllMoviesTableViewTableViewController: UITableViewController {
 //            })
 //        }
     }
+    
+    func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Movies"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+    }
+    
+    func isSearchBarEmpty() -> Bool {
+        // Returns true if the text is empty or nil
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    private var lastSearch: String? = nil
+    
+    func filterContentForSearchText(_ searchText: String) {
+        lastSearch = searchText
+        SearchNetworkingService.shared.requestSearch(searchText) { [weak self] (found) in
+            guard let this = self else { return }
+            
+            DataManager.shared.filteredMovies = found.results
+            SearchNetworkingService.shared.currentPage = 1
+            
+            DispatchQueue.main.async {
+                this.tableView.reloadData()
+            }
+        }
+    }
+    
+    func isFiltering() -> Bool {
+        return searchController.isActive && !isSearchBarEmpty()
+    }
 
     // MARK: - Table view data source
 
@@ -49,15 +85,26 @@ class AllMoviesTableViewTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        if isFiltering() {
+            return DataManager.shared.filteredMovies.count
+        }
+        
         return DataManager.shared.popularMovies.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: movieCellReuseId, for: indexPath)
+        
+        var movie: Movie? = nil
+        
+        if isFiltering() {
+            movie = DataManager.shared.filteredMovies[indexPath.row]
+        } else {
+            movie = DataManager.shared.popularMovies[indexPath.row]
+        }
 
-        if let movieCell = cell as? MovieTableViewCell {
-            movieCell.update(withMovie: DataManager.shared.popularMovies[indexPath.row],
+        if let movieCell = cell as? MovieTableViewCell, let theMovie = movie {
+            movieCell.update(withMovie: theMovie,
                              newIndex: indexPath.row)
         }
 
@@ -93,17 +140,53 @@ class AllMoviesTableViewTableViewController: UITableViewController {
         }
         
         if (actualPosition > loadMorePoint && self.readyToLoadMore == true) {
-            PopularMoviesNetworkingService.shared.popularMoviesCurrentPage += 1
-            PopularMoviesNetworkingService.shared.requestPopularMovies { [weak self] (moviesPage) in
+            
+            if isFiltering() {
+                
+            } else {
+                requestAdditionalPopularMovies()
+            }
+            
+            self.readyToLoadMore = false
+        }
+    }
+    
+    func requestAdditionalPopularMovies() {
+        PopularMoviesNetworkingService.shared.popularMoviesCurrentPage += 1
+        PopularMoviesNetworkingService.shared.requestPopularMovies { [weak self] (moviesPage) in
+            guard let this = self else { return }
+            
+            DataManager.shared.popularMovies.append(contentsOf: moviesPage.results)
+            
+            DispatchQueue.main.async {
+                this.tableView.reloadData()
+            }
+        }
+    }
+    
+    func requestAdditionalFilteredResults() {
+        if let searchText = lastSearch {
+            SearchNetworkingService.shared.currentPage += 1
+            
+            SearchNetworkingService.shared.requestSearch(searchText) { [weak self] (moviesPage) in
                 guard let this = self else { return }
                 
-                DataManager.shared.popularMovies.append(contentsOf: moviesPage.results)
+                DataManager.shared.filteredMovies.append(contentsOf: moviesPage.results)
                 
                 DispatchQueue.main.async {
                     this.tableView.reloadData()
                 }
             }
-            self.readyToLoadMore = false
+        }
+    }
+}
+
+extension AllMoviesTableViewTableViewController: UISearchResultsUpdating {
+    
+    // MARK: - UISearchResultsUpdating Delegate
+    func updateSearchResults(for searchController: UISearchController) {
+        if let theInput = searchController.searchBar.text {
+            filterContentForSearchText(theInput)
         }
     }
 }

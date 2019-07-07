@@ -1,30 +1,30 @@
 //
-//  PopularMoviesNetworkingService.swift
+//  SearchNetworkingService.swift
 //  Movies
 //
-//  Created by Dmytro Skorokhod on 7/4/19.
+//  Created by Dmytro Skorokhod on 7/7/19.
 //  Copyright © 2019 Dmytro Skorokhod. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-class PopularMoviesNetworkingService: NSObject {
+class SearchNetworkingService: NSObject {
     
-    static let shared = PopularMoviesNetworkingService()
+    static let shared = SearchNetworkingService()
     
-    var popularMoviesCurrentPage = 1
+    var currentPage = 1
     
-    let moviesPath: String = "https://api.themoviedb.org/3/movie/popular"
+    let searchPath: String = "https://api.themoviedb.org/3/search/movie"
     
-    func requestPopularMovies(_ completionHandler: @escaping (MoviesPage) -> Void) {
+    func requestSearch(_ searchString: String, _ completionHandler: @escaping (MoviesPage) -> Void) {
         DispatchQueue.global().async { [weak self] in
             guard let this = self else { return }
-            this.popularMoviesDataTask(completionHandler)?.resume()
+            this.searchDataTask(searchString, completionHandler)?.resume()
         }
     }
     
-    func popularMoviesDataTask(_ completionHandler: @escaping (MoviesPage) -> Void) -> URLSessionDataTask? {
-        let request = popularMoviesRequest()
+    func searchDataTask(_ searchString: String, _ completionHandler: @escaping (MoviesPage) -> Void) -> URLSessionDataTask? {
+        let request = searchRequest(searchString)
         
         if let theRequest = request {
             
@@ -41,12 +41,13 @@ class PopularMoviesNetworkingService: NSObject {
         return nil
     }
     
-    func popularMoviesRequest() -> URLRequest? {
-        var urlComponents = URLComponents(string: moviesPath)
+    func searchRequest(_ searchString: String) -> URLRequest? {
+        var urlComponents = URLComponents(string: searchPath)
         urlComponents?.queryItems = [
             URLQueryItem(name: "api_key", value: AuthorizationManager.shared.APIKey),
             URLQueryItem(name: "language", value: "En-US"),
-            URLQueryItem(name: "page", value: "\(popularMoviesCurrentPage)")
+            URLQueryItem(name: "query", value: "\(searchString)"),
+            URLQueryItem(name: "page", value: "\(currentPage)")
         ]
         
         if let url = urlComponents?.url {

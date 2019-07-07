@@ -113,6 +113,63 @@ class StartViewController: UIViewController {
                 this.view.layoutIfNeeded()
             })
             
+            this.addSplit1Step2MoveToTheTop()
+        }
+    }
+    
+    func addSplit1Step2MoveToTheTop() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
+            guard let this = self else { return }
+            
+            UIView.animate(withDuration: 0.2, animations: {
+                if let theOldVerticalConstraint = this.verticalConstraint {
+                    NSLayoutConstraint.deactivate([theOldVerticalConstraint])
+                }
+                
+                let theNewVerticalConstraint = NSLayoutConstraint(item: this.square!, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: this.view, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: -(this.view.bounds.width * 0.15))
+                this.verticalConstraint = theNewVerticalConstraint
+                NSLayoutConstraint.activate([theNewVerticalConstraint])
+                this.view.layoutIfNeeded()
+            })
+            
+            this.addSplit1Step2MoveToTheBottom()
+        }
+    }
+    
+    func addSplit1Step2MoveToTheBottom() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
+            guard let this = self else { return }
+            
+            UIView.animate(withDuration: 0.2, animations: {
+                if let theOldVerticalConstraint = this.verticalConstraint {
+                    NSLayoutConstraint.deactivate([theOldVerticalConstraint])
+                }
+                
+                let theNewVerticalConstraint = NSLayoutConstraint(item: this.square!, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: this.view, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: (this.view.bounds.width * 0.15))
+                this.verticalConstraint = theNewVerticalConstraint
+                NSLayoutConstraint.activate([theNewVerticalConstraint])
+                this.view.layoutIfNeeded()
+            })
+            
+            this.addSplit1Step2MoveToTheCenter()
+        }
+    }
+    
+    func addSplit1Step2MoveToTheCenter() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
+            guard let this = self else { return }
+            
+            UIView.animate(withDuration: 0.2, animations: {
+                if let theOldVerticalConstraint = this.verticalConstraint {
+                    NSLayoutConstraint.deactivate([theOldVerticalConstraint])
+                }
+                
+                let theNewVerticalConstraint = NSLayoutConstraint(item: this.square!, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: this.view, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0)
+                this.verticalConstraint = theNewVerticalConstraint
+                NSLayoutConstraint.activate([theNewVerticalConstraint])
+                this.view.layoutIfNeeded()
+            })
+            
             this.addColorChange()
         }
     }

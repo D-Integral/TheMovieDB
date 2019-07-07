@@ -120,7 +120,13 @@ class AllMoviesTableViewTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let movieDetails = storyboard.instantiateViewController(withIdentifier: "MovieDetails") as? DetailsViewController {
-            movieDetails.movie = DataManager.shared.popularMovies[indexPath.row]
+            
+            if isFiltering() {
+                movieDetails.movie = DataManager.shared.filteredMovies[indexPath.row]
+            } else {
+                movieDetails.movie = DataManager.shared.popularMovies[indexPath.row]
+            }
+            
             self.navigationController?.pushViewController(movieDetails, animated:true)
         }
     }

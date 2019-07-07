@@ -26,6 +26,9 @@
 		83E7BC5522D246A00057EACF /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E7BC5422D246A00057EACF /* StartViewController.swift */; };
 		83E7BC5622D246A00057EACF /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E7BC5422D246A00057EACF /* StartViewController.swift */; };
 		83E7BC5722D246A00057EACF /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E7BC5422D246A00057EACF /* StartViewController.swift */; };
+		83E7BC5922D248D50057EACF /* MoviesTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E7BC5822D248D50057EACF /* MoviesTabBarController.swift */; };
+		83E7BC5A22D248D50057EACF /* MoviesTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E7BC5822D248D50057EACF /* MoviesTabBarController.swift */; };
+		83E7BC5B22D248D50057EACF /* MoviesTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E7BC5822D248D50057EACF /* MoviesTabBarController.swift */; };
 		83FF861A22CE77CB007D532E /* AllMoviesTableViewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FF861822CE77CB007D532E /* AllMoviesTableViewTableViewController.swift */; };
 		83FF861B22CE77CB007D532E /* AllMoviesTableViewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FF861822CE77CB007D532E /* AllMoviesTableViewTableViewController.swift */; };
 		83FF861C22CE77CB007D532E /* AllMoviesTableViewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FF861822CE77CB007D532E /* AllMoviesTableViewTableViewController.swift */; };
@@ -102,6 +105,7 @@
 		83A1F88622D1B4D1007E2541 /* SearchNetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNetworkingService.swift; sourceTree = "<group>"; };
 		83ACD4A722CE15EC00EC95E1 /* RoutingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingManager.swift; sourceTree = "<group>"; };
 		83E7BC5422D246A00057EACF /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		83E7BC5822D248D50057EACF /* MoviesTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesTabBarController.swift; sourceTree = "<group>"; };
 		83FF861822CE77CB007D532E /* AllMoviesTableViewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMoviesTableViewTableViewController.swift; sourceTree = "<group>"; };
 		83FF862022CE7926007D532E /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		83FF862822CE8627007D532E /* PopularMoviesNetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesNetworkingService.swift; sourceTree = "<group>"; };
@@ -219,6 +223,7 @@
 				83FF862022CE7926007D532E /* MovieTableViewCell.swift */,
 				83FF865122D0BD1E007D532E /* DetailsViewController.swift */,
 				83E7BC5422D246A00057EACF /* StartViewController.swift */,
+				83E7BC5822D248D50057EACF /* MoviesTabBarController.swift */,
 				83005CDE22CB940D000949C5 /* Main.storyboard */,
 			);
 			path = View;
@@ -379,6 +384,7 @@
 				83FF863E22CF554D007D532E /* DiscardableCacheItem.swift in Sources */,
 				83FF864A22D0B585007D532E /* FavoritesTableViewController.swift in Sources */,
 				83A1F88722D1B4D1007E2541 /* SearchNetworkingService.swift in Sources */,
+				83E7BC5922D248D50057EACF /* MoviesTabBarController.swift in Sources */,
 				83FF862222CE7926007D532E /* MovieTableViewCell.swift in Sources */,
 				83FF864622CFC36D007D532E /* Account.swift in Sources */,
 				83FF862922CE8627007D532E /* PopularMoviesNetworkingService.swift in Sources */,
@@ -413,6 +419,7 @@
 				83FF863B22CF54DA007D532E /* Cache.swift in Sources */,
 				83ACD4A922CE15ED00EC95E1 /* RoutingManager.swift in Sources */,
 				83FF865322D0BD1E007D532E /* DetailsViewController.swift in Sources */,
+				83E7BC5A22D248D50057EACF /* MoviesTabBarController.swift in Sources */,
 				83005CF322CB9411000949C5 /* MoviesTests.swift in Sources */,
 				83FF863F22CF554D007D532E /* DiscardableCacheItem.swift in Sources */,
 				83005D0E22CCD631000949C5 /* AuthorizationManager.swift in Sources */,
@@ -438,6 +445,7 @@
 				83FF863C22CF54DA007D532E /* Cache.swift in Sources */,
 				83ACD4AA22CE15ED00EC95E1 /* RoutingManager.swift in Sources */,
 				83FF865422D0BD1E007D532E /* DetailsViewController.swift in Sources */,
+				83E7BC5B22D248D50057EACF /* MoviesTabBarController.swift in Sources */,
 				83005CFE22CB9411000949C5 /* MoviesUITests.swift in Sources */,
 				83FF864022CF554D007D532E /* DiscardableCacheItem.swift in Sources */,
 				83005D0F22CCD631000949C5 /* AuthorizationManager.swift in Sources */,

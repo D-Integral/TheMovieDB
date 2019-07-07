@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        SplitManager.shared.generateRandomSplitGroup()
         DataManager.shared.context = persistentContainer.viewContext
         DataManager.shared.restore()
         

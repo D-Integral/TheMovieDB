@@ -99,7 +99,11 @@ class StartViewController: UIViewController {
                 this.view.layoutIfNeeded()
             })
             
-            this.addSplitGroupAnimation1()
+            if SplitManager.shared.splitGroup == SplitGroup.first {
+                this.addSplitGroupAnimation1()
+            } else {
+                this.addSplitGroupAnimation2()
+            }
         }
     }
     
@@ -132,11 +136,11 @@ class StartViewController: UIViewController {
                 this.view.layoutIfNeeded()
             })
             
-            this.addSplit1Step2MoveToTheBottom()
+            this.addSplit1Step3MoveToTheBottom()
         }
     }
     
-    func addSplit1Step2MoveToTheBottom() {
+    func addSplit1Step3MoveToTheBottom() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
             guard let this = self else { return }
             
@@ -151,11 +155,11 @@ class StartViewController: UIViewController {
                 this.view.layoutIfNeeded()
             })
             
-            this.addSplit1Step2MoveToTheCenter()
+            this.addSplit1Step4MoveToTheCenter()
         }
     }
     
-    func addSplit1Step2MoveToTheCenter() {
+    func addSplit1Step4MoveToTheCenter() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
             guard let this = self else { return }
             
@@ -169,6 +173,22 @@ class StartViewController: UIViewController {
                 NSLayoutConstraint.activate([theNewVerticalConstraint])
                 this.view.layoutIfNeeded()
             })
+            
+            this.addColorChange()
+        }
+    }
+    
+    func addSplitGroupAnimation2() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
+            guard let this = self else { return }
+            
+            UIView.animate(withDuration: 0.1) { () -> Void in
+                this.square.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+            }
+            
+            UIView.animate(withDuration: 0.1, delay: 0.1, options: [], animations: { () -> Void in
+                this.square.transform = CGAffineTransform(rotationAngle: CGFloat.pi * 3.0)
+            }, completion: nil)
             
             this.addColorChange()
         }
@@ -193,6 +213,10 @@ class StartViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    func degreesToRadians(degrees: CGFloat) -> CGFloat {
+        return ((degrees) / 180.0 * CGFloat.pi)
     }
     
 }
